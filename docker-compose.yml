@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+
+    flaskapp:
+        build:
+            context: "."
+            dockerfile: "Dockerfile"
+        image: "flaskapp:latest"
+        ports:
+            - "5000:5000"
+        depends_on:
+            - postgres
+        environment:
+            - POSTGRES_PASSWORD=testtest
+            - POSTGRES_USER=momo
+            - POSTGRES_DB=database
+                 
+    postgres:
+        image: "postgres:latest"
+        environment:
+            #SECRET_KEY: "mysecret"
+            - POSTGRES_PASSWORD=testtest
+            - POSTGRES_USER=momo
+            - POSTGRES_DB=database
+        restart: "on-failure"
+        
